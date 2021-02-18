@@ -14,18 +14,17 @@ import edu.wpi.first.wpiutil.math.MathUtil;
  * such as moving, getting encoder values, or configuring PID.
  */
 public class SwerveModule extends SubsystemBase {
-    private WPI_TalonSRX turn;
+    //private WPI_TalonSRX turn;
     private CANCoder canCoder;
     private PIDController turnController;
     // position is used for simulation testing
     private double turnZero, pidOutput, position;
 
-    public SwerveModule(WPI_TalonSRX turn, CANCoder canCoder, double turnZero) {
-        this.turn = turn;
+    public SwerveModule(/*WPI_TalonSRX turn,*/ CANCoder canCoder, double turnZero) {
+        //this.turn = turn;
+        canCoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
         this.canCoder = canCoder;
         this.turnZero = turnZero;
-
-        canCoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
 
         // kP determined through simulation testing
         turnController = new PIDController(0.01, 0.0, 0.0);
@@ -44,7 +43,7 @@ public class SwerveModule extends SubsystemBase {
             }
             else pidOutput = turnController.calculate(canCoder.getPosition());
             pidOutput = MathUtil.clamp(pidOutput, -1.0, 1.0);
-            turn.set(pidOutput);
+            //turn.set(pidOutput);
             SmartDashboard.putNumber("PID Output", pidOutput);
         }
         if (RobotBase.isSimulation()) SmartDashboard.putNumber("Module Angle", position);
