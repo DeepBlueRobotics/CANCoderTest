@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
-import com.revrobotics.CANSparkMax;
 
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -14,13 +14,13 @@ import edu.wpi.first.wpiutil.math.MathUtil;
  * such as moving, getting encoder values, or configuring PID.
  */
 public class SwerveModule extends SubsystemBase {
-    private CANSparkMax turn;
+    private WPI_TalonSRX turn;
     private CANCoder canCoder;
     private PIDController turnController;
     // position is used for simulation testing
     private double turnZero, pidOutput, position;
 
-    public SwerveModule(CANSparkMax turn, CANCoder canCoder, double turnZero) {
+    public SwerveModule(WPI_TalonSRX turn, CANCoder canCoder, double turnZero) {
         this.turn = turn;
         this.canCoder = canCoder;
         this.turnZero = turnZero;

@@ -4,9 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.sensors.CANCoder;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.TeleopDrive;
@@ -18,7 +17,7 @@ public class RobotContainer {
   
   public RobotContainer() {
     joystick = new Joystick(Constants.joystickPort);
-    module = new SwerveModule(new CANSparkMax(Constants.turnMotorPort, MotorType.kBrushless),
+    module = new SwerveModule(new WPI_TalonSRX(Constants.turnMotorPort),
                               new CANCoder(Constants.cancoderPort), Constants.turnZero);
     module.setDefaultCommand(new TeleopDrive(module, joystick));
   }
